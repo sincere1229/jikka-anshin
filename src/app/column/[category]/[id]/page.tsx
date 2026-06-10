@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+export const dynamic = 'force-static'
+export const dynamicParams = false
+
 const COLUMNS: Record<string, Record<number, { title: string; body: string; a8: { name: string; url: string; desc: string }[] }>> = {
   'hajimete': {
     1: { title: "実家をどうするか迷ったらまず読む記事", body: "売却・賃貸・空き家・同居の4つの選択肢を整理して、判断基準をわかりやすく解説します。", a8: [{"name": "ワケガイ（買取）", "url": "https://px.a8.net/svt/ejp?a8mat=XXXXXX+WAKEGAI+XXXXXX", "desc": "訳あり・築古・空き家も買取。最短2週間で現金化。"}, {"name": "FP無料相談", "url": "https://px.a8.net/svt/ejp?a8mat=XXXXXX+FPSOUDAN+XXXXXX", "desc": "相続・不動産をFPに無料相談。"}] },
@@ -86,14 +89,69 @@ const CAT_LABEL: Record<string, string> = {
   'dokyo-col': '同居・二世帯',
 }
 
-export async function generateStaticParams() {
-  const params = []
-  for (const cat of Object.keys(COLUMNS)) {
-    for (const id of Object.keys(COLUMNS[cat])) {
-      params.push({ category: cat, id })
-    }
-  }
-  return params
+export function generateStaticParams() {
+  return [
+  { category: 'hajimete', id: '1' },
+  { category: 'hajimete', id: '2' },
+  { category: 'hajimete', id: '3' },
+  { category: 'hajimete', id: '4' },
+  { category: 'hajimete', id: '5' },
+  { category: 'hajimete', id: '6' },
+  { category: 'hajimete', id: '7' },
+  { category: 'hajimete', id: '8' },
+  { category: 'hajimete', id: '9' },
+  { category: 'hajimete', id: '10' },
+  { category: 'baikyaku-col', id: '1' },
+  { category: 'baikyaku-col', id: '2' },
+  { category: 'baikyaku-col', id: '3' },
+  { category: 'baikyaku-col', id: '4' },
+  { category: 'baikyaku-col', id: '5' },
+  { category: 'baikyaku-col', id: '6' },
+  { category: 'baikyaku-col', id: '7' },
+  { category: 'baikyaku-col', id: '8' },
+  { category: 'baikyaku-col', id: '9' },
+  { category: 'baikyaku-col', id: '10' },
+  { category: 'akiya-col', id: '1' },
+  { category: 'akiya-col', id: '2' },
+  { category: 'akiya-col', id: '3' },
+  { category: 'akiya-col', id: '4' },
+  { category: 'akiya-col', id: '5' },
+  { category: 'akiya-col', id: '6' },
+  { category: 'akiya-col', id: '7' },
+  { category: 'akiya-col', id: '8' },
+  { category: 'akiya-col', id: '9' },
+  { category: 'akiya-col', id: '10' },
+  { category: 'sozoku-col', id: '1' },
+  { category: 'sozoku-col', id: '2' },
+  { category: 'sozoku-col', id: '3' },
+  { category: 'sozoku-col', id: '4' },
+  { category: 'sozoku-col', id: '5' },
+  { category: 'sozoku-col', id: '6' },
+  { category: 'sozoku-col', id: '7' },
+  { category: 'sozoku-col', id: '8' },
+  { category: 'sozoku-col', id: '9' },
+  { category: 'sozoku-col', id: '10' },
+  { category: 'chintai-col', id: '1' },
+  { category: 'chintai-col', id: '2' },
+  { category: 'chintai-col', id: '3' },
+  { category: 'chintai-col', id: '4' },
+  { category: 'chintai-col', id: '5' },
+  { category: 'chintai-col', id: '6' },
+  { category: 'chintai-col', id: '7' },
+  { category: 'chintai-col', id: '8' },
+  { category: 'chintai-col', id: '9' },
+  { category: 'chintai-col', id: '10' },
+  { category: 'dokyo-col', id: '1' },
+  { category: 'dokyo-col', id: '2' },
+  { category: 'dokyo-col', id: '3' },
+  { category: 'dokyo-col', id: '4' },
+  { category: 'dokyo-col', id: '5' },
+  { category: 'dokyo-col', id: '6' },
+  { category: 'dokyo-col', id: '7' },
+  { category: 'dokyo-col', id: '8' },
+  { category: 'dokyo-col', id: '9' },
+  { category: 'dokyo-col', id: '10' }
+  ]
 }
 
 export async function generateMetadata({ params }: { params: { category: string; id: string } }): Promise<Metadata> {
