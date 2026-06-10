@@ -191,7 +191,7 @@ export default async function ColumnPage({ params }: { params: Promise<{ categor
       )}
       <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
         {idNum > 1 && <Link href={`/column/${category}/${idNum - 1}`} style={{ flex: 1, display: 'block', textAlign: 'center', background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 8, padding: '10px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>← 前の記事</Link>}
-        {idNum < 10 && <Link href={`/column/${params.category}/${idNum + 1}`} style={{ flex: 1, display: 'block', textAlign: 'center', background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 8, padding: '10px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>次の記事 →</Link>}
+        {idNum < 10 && <Link href={`/column/${category}/${idNum + 1}`} style={{ flex: 1, display: 'block', textAlign: 'center', background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 8, padding: '10px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>次の記事 →</Link>}
       </div>
       <div style={{ marginTop: 16, textAlign: 'center' }}>
         <Link href="/" style={{ fontSize: 13, color: '#92400e', textDecoration: 'none' }}>診断を受ける →</Link>
