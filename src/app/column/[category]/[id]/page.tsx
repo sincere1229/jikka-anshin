@@ -161,11 +161,12 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   return { title: `${col.title} | 実家どうするナビ`, description: col.body.slice(0, 80) + '...' }
 }
 
-export default function ColumnPage({ params }: { params: { category: string; id: string } }) {
-  const col = COLUMNS[params.category]?.[Number(params.id)]
+export default async function ColumnPage({ params }: { params: Promise<{ category: string; id: string }> }) {
+  const { category, id } = await params
+  const col = COLUMNS[category]?.[Number(id)]
   if (!col) notFound()
-  const catLabel = CAT_LABEL[params.category] || ''
-  const idNum = Number(params.id)
+  const catLabel = CAT_LABEL[category] || ''
+  const idNum = Number(id)
   return (
     <main style={{ maxWidth: 480, margin: '0 auto', padding: '16px 16px 48px' }}>
       <div style={{ marginBottom: 16 }}>
