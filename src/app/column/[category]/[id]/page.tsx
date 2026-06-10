@@ -154,8 +154,9 @@ export function generateStaticParams() {
   ]
 }
 
-export async function generateMetadata({ params }: { params: { category: string; id: string } }): Promise<Metadata> {
-  const col = COLUMNS[params.category]?.[Number(params.id)]
+export async function generateMetadata({ params }: { params: Promise<{ category: string; id: string }> }): Promise<Metadata> {
+  const { category, id } = await params
+  const col = COLUMNS[category]?.[Number(id)]
   if (!col) return {}
   return { title: `${col.title} | 実家どうするナビ`, description: col.body.slice(0, 80) + '...' }
 }
