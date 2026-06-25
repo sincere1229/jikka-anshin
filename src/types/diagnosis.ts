@@ -40,9 +40,13 @@ export interface EmotionInfo {
 
 export interface RecommendService {
   name: string
-  url: string
+  url: string           // af.moshimo.com クリック計測URL
   description: string
   forWho: string
   notFor: string
   badge: string
+  imageUrl?: string     // バナー画像URL
+  imageWidth?: number
+  imageHeight?: number
+  impUrl?: string       // インプレッション計測URL（もしも必須）
 }
