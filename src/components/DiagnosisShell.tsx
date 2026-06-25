@@ -284,25 +284,40 @@ export default function DiagnosisShell({
                 </p>
               </div>
               {recommendServices.map((s, i) => (
-                <a key={i} href={s.url} target="_blank" rel="nofollow noopener noreferrer"
-                  style={{
-                    display: 'block', border: '1px solid #b8ddb8',
-                    borderRadius: 10, padding: '12px', marginBottom: 8, textDecoration: 'none',
-                  }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: '#1f2937' }}>{s.name}</span>
-                    <span style={{ fontSize: 10, background: '#f0faf0', color: '#7b52c8', borderRadius: 4, padding: '2px 6px' }}>
-                      {s.badge}
-                    </span>
-                  </div>
-                  <p style={{ fontSize: 12, color: '#6b7280', margin: '0 0 8px' }}>{s.description}</p>
-                  <div style={{
-                    background: '#5b3fa0', color: '#fff',
-                    borderRadius: 6, padding: '7px', textAlign: 'center', fontSize: 12, fontWeight: 700,
-                  }}>
-                    詳しく見てみる →
-                  </div>
-                </a>
+                <div key={i} style={{ border: '1px solid #b8ddb8', borderRadius: 10, marginBottom: 8, overflow: 'hidden', background: '#fff' }}>
+                  <a href={s.url} target="_blank" rel="nofollow noopener noreferrer"
+                    style={{ display: 'block', padding: '12px', textDecoration: 'none' }}>
+                    {/* バナー画像（あれば表示・インプレッション計測付き） */}
+                    {s.imageUrl && (
+                      <div style={{ textAlign: 'center', marginBottom: 8 }}>
+                        <img
+                          src={s.imageUrl}
+                          alt={s.name}
+                          width={Math.min(s.imageWidth ?? 300, 260)}
+                          height={Math.round((s.imageHeight ?? 250) * Math.min(s.imageWidth ?? 300, 260) / (s.imageWidth ?? 300))}
+                          style={{ border: 'none', maxWidth: '100%', maxHeight: 180, objectFit: 'contain', borderRadius: 6 }}
+                        />
+                      </div>
+                    )}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: '#1f2937' }}>{s.name}</span>
+                      <span style={{ fontSize: 10, background: '#f0faf0', color: '#2d6a2d', borderRadius: 4, padding: '2px 6px', border: '1px solid #c8e6c8', whiteSpace: 'nowrap' }}>
+                        {s.badge}
+                      </span>
+                    </div>
+                    <p style={{ fontSize: 12, color: '#6b7280', margin: '0 0 8px', lineHeight: 1.5 }}>{s.description}</p>
+                    <div style={{
+                      background: 'linear-gradient(135deg, #2d6a2d, #1a5a1a)', color: '#fff',
+                      borderRadius: 6, padding: '8px', textAlign: 'center', fontSize: 12, fontWeight: 700,
+                    }}>
+                      詳しく見てみる →
+                    </div>
+                  </a>
+                  {/* インプレッション計測（もしもアフィリエイト必須） */}
+                  {s.impUrl && (
+                    <img src={s.impUrl} width={1} height={1} style={{ border: 'none', display: 'block' }} loading="lazy" alt="" />
+                  )}
+                </div>
               ))}
             </div>
           )}
