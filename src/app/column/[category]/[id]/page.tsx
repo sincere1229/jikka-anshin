@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 export const dynamic = 'force-static'
 export const dynamicParams = false
 
-const COLUMNS: Record<string, Record<number, { title: string; body: string; a8: { name: string; url: string; desc: string }[] }>> = {
+const COLUMNS: Record<string, Record<number, { title: string; body: string; a8: { name: string; url: string; desc: string; serviceSlug?: string; deepColumnUrl?: string; imgUrl?: string; imgWidth?: number; impUrl?: string }[] }>> = {
   'hajimete': {
     1: { title: "実家をどうするか迷ったらまず読む記事", body: "「実家をどうしよう」と漠然と悩んでいる方は多いはずです。親が高齢になり、いつかは空き家になるかもしれない。でも、何から考えればいいのかわからない。そんな方のために、まず「選択肢の整理」から始めましょう。\n\n実家の扱い方には大きく4つの選択肢があります。①売却（まとまった現金を得られる）、②賃貸（毎月の収入が入る）、③活用（リノベやシェアハウスなど）、④そのまま管理（家族が住む・空き家として維持）です。\n\nどれが正解かは、家族の状況・家の状態・立地・財産状況によって変わります。大切なのは「なんとなく放置」ではなく、意識的に選択することです。まずは家族で話し合う場を作り、それぞれの希望をすり合わせることが第一歩になります。\n\n診断を受けると、あなたの状況に合った選択肢が10問で見えてきます。ぜひ試してみてください。", a8: [{name: "ラクウル（空き家・中古戸建買取）", url: "https://px.a8.net/svt/ejp?a8mat=4B3VR7+C968T6+56AO+HV7V6", desc: "空き家・中古戸建ての買取専門。最短3日で査定。"}, {name: "相続の窓口", url: "https://px.a8.net/svt/ejp?a8mat=4B3VR7+C8KT7E+56AO+BWVTE", desc: "相続の面倒ごとをワンストップで解決。"}] },
     2: { title: "親が高齢になったら考えること", body: "親が70代・80代になったとき、子供として何を考えればいいのでしょうか。「まだ元気だから大丈夫」と思っていても、認知症や介護が突然始まることがあります。手遅れになる前に、3つのテーマを話し合っておきましょう。\n\n1つ目は「実家」です。誰が住むのか、老後どうするのか、売却や賃貸の可能性はあるのかを確認しておきます。2つ目は「介護」です。在宅か施設か、誰が面倒をみるのかを家族間で共有しておくことが重要です。3つ目は「相続」です。遺言書があるか、財産の内訳はどうなっているかを早めに把握しておきましょう。\n\nこれらの話題は「縁起でもない」と避けがちですが、事前に話し合っておくことで、いざというときに家族がもめることなく動けます。親が元気なうちこそ、穏やかに話し合えるチャンスです。", a8: [{name: "ラクウル（空き家・中古戸建買取）", url: "https://px.a8.net/svt/ejp?a8mat=4B3VR7+C968T6+56AO+HV7V6", desc: "空き家・中古戸建ての買取専門。最短3日で査定。"}, {name: "相続の窓口", url: "https://px.a8.net/svt/ejp?a8mat=4B3VR7+C8KT7E+56AO+BWVTE", desc: "相続の面倒ごとをワンストップで解決。"}] },
@@ -185,17 +185,62 @@ export default async function ColumnPage({ params }: { params: Promise<{ categor
       </div>
       {col.a8.length > 0 && (
         <div style={{ marginBottom: 16 }}>
-          <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>※ 広告・PR</p>
-          {col.a8.map((s, i) => (
-            <a key={i} href={s.url} target="_blank" rel="nofollow noopener noreferrer"
-              style={{ display: 'block', background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 10, padding: '12px 14px', marginBottom: 8, textDecoration: 'none' }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#1f2937', marginBottom: 4 }}>{s.name}</div>
-              <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8 }}>{s.desc}</div>
-              <div style={{ background: '#1a5a1a', color: '#fff', borderRadius: 6, padding: '7px', textAlign: 'center' as const, fontSize: 12, fontWeight: 700 }}>
-                詳しく見てみる →
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+            <div style={{ width: 28, height: 28, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, position: 'relative', border: '2px solid #90c890' }}>
+              <img src="/images/characters/minori-smile.png" alt="みのり" width={28} height={28} style={{ objectFit: 'cover' }} />
+            </div>
+            <p style={{ fontSize: 12, fontWeight: 700, color: '#1a2d1a', margin: 0 }}>
+              この記事に関連するサービス
+            </p>
+          </div>
+          <p style={{ fontSize: 11, color: '#9ca3af', marginBottom: 8 }}>※ 広告・PR</p>
+          {col.a8.map((s, i) => {
+            // 固定紹介ページがある場合はそちらへ、なければ直接リンク
+            const linkUrl = s.serviceSlug ? `/service/${s.serviceSlug}` : s.url
+            const isInternal = !!s.serviceSlug
+            return (
+              <div key={i} style={{ background: '#fff', border: '1px solid #b8ddb8', borderRadius: 12, overflow: 'hidden', marginBottom: 10 }}>
+                {/* バナー画像 */}
+                {s.imgUrl && (
+                  <div style={{ textAlign: 'center', padding: '10px 12px 0', background: '#f9fbf9' }}>
+                    <img
+                      src={s.imgUrl}
+                      alt={s.name}
+                      width={Math.min(s.imgWidth ?? 300, 260)}
+                      style={{ maxWidth: '100%', maxHeight: 160, objectFit: 'contain', borderRadius: 6 }}
+                    />
+                  </div>
+                )}
+                <div style={{ padding: '10px 12px 12px' }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#1f2937', marginBottom: 4 }}>{s.name}</div>
+                  <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 6, lineHeight: 1.5 }}>{s.desc}</div>
+                  {/* 深掘りコラムへのリンク（あれば） */}
+                  {s.deepColumnUrl && (
+                    <Link href={s.deepColumnUrl}
+                      style={{ display: 'block', background: '#f0faf0', border: '1px solid #b8ddb8', borderRadius: 6, padding: '7px', textAlign: 'center' as const, fontSize: 11, fontWeight: 600, color: '#1a5a1a', textDecoration: 'none', marginBottom: 6 }}>
+                      📖 このサービスを詳しく読む →
+                    </Link>
+                  )}
+                  {/* サービス紹介ページ or 直接リンク */}
+                  {isInternal ? (
+                    <Link href={linkUrl}
+                      style={{ display: 'block', background: 'linear-gradient(135deg, #2d6a2d, #1a5a1a)', color: '#fff', borderRadius: 6, padding: '8px', textAlign: 'center' as const, fontSize: 12, fontWeight: 700, textDecoration: 'none' }}>
+                      サービスの詳細を見る →
+                    </Link>
+                  ) : (
+                    <a href={s.url} target="_blank" rel="nofollow noopener noreferrer"
+                      style={{ display: 'block', background: 'linear-gradient(135deg, #2d6a2d, #1a5a1a)', color: '#fff', borderRadius: 6, padding: '8px', textAlign: 'center' as const, fontSize: 12, fontWeight: 700, textDecoration: 'none' }}>
+                      詳しく見てみる →
+                    </a>
+                  )}
+                </div>
+                {/* インプレッション計測 */}
+                {s.impUrl && (
+                  <img src={s.impUrl} width={1} height={1} style={{ border: 'none', display: 'block' }} loading="lazy" alt="" />
+                )}
               </div>
-            </a>
-          ))}
+            )
+          })}
         </div>
       )}
       <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
