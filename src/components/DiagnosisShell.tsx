@@ -17,7 +17,7 @@ interface Props {
   emotionMap?: Record<string, { feature: string; reason: string; pitfall: string; firstStep: string }>
 }
 
-// 質問番号に応じてしずくの表情を切り替え
+// 質問番号に応じてみのりの表情を切り替え
 function getShizukuImage(current: number, total: number): string {
   if (current === 0) return '/images/characters/minori-smile.png'
   if (current >= total - 2) return '/images/characters/minori-care.png'
@@ -26,7 +26,7 @@ function getShizukuImage(current: number, total: number): string {
     : '/images/characters/minori-care.png'
 }
 
-// 質問番号に応じたしずくのセリフ
+// 質問番号に応じたみのりのセリフ
 function getShizukuMessage(current: number, total: number, question: string): string {
   if (current === 0) return 'まず最初の質問です。気軽に答えてくださいね。'
   if (current === Math.floor(total / 2)) return 'もう半分です。あと少しで結果が出ます。'
@@ -96,7 +96,7 @@ export default function DiagnosisShell({
         width: 48, height: 48, borderRadius: '50%', overflow: 'hidden',
         margin: '0 auto 12px', position: 'relative',
       }}>
-        <Image src="/images/characters/minori-smile.png" alt="しずく" fill style={{ objectFit: 'cover' }} />
+        <Image src="/images/characters/minori-smile.png" alt="みのり" fill style={{ objectFit: 'cover' }} />
       </div>
       <p style={{ color: '#2d6a2d', fontSize: 14 }}>みのりが準備中です...</p>
     </main>
@@ -128,16 +128,16 @@ export default function DiagnosisShell({
             Q{current + 1} / {questions.length}
           </p>
 
-          {/* しずくが質問を語りかける */}
+          {/* みのりが質問を語りかける */}
           <div style={{ display: 'flex', gap: 10, marginBottom: 14, alignItems: 'flex-start' }}>
             <div style={{
               width: 42, height: 42, borderRadius: '50%', overflow: 'hidden',
               flexShrink: 0, border: '2px solid #90c890', position: 'relative',
             }}>
-              <Image src={shizukuImg} alt="しずく" fill style={{ objectFit: 'cover' }} />
+              <Image src={shizukuImg} alt="みのり" fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ flex: 1 }}>
-              {/* しずくのセリフ */}
+              {/* みのりのセリフ */}
               <div style={{
                 background: '#f0faf0',
                 borderRadius: '0 12px 12px 12px',
@@ -189,13 +189,13 @@ export default function DiagnosisShell({
         </>
       ) : (
         <>
-          {/* 結果：しずくからの報告 */}
+          {/* 結果：みのりからの報告 */}
           <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'flex-start' }}>
             <div style={{
               width: 48, height: 48, borderRadius: '50%', overflow: 'hidden',
               flexShrink: 0, border: '2px solid #90c890', position: 'relative',
             }}>
-              <Image src="/images/characters/minori-smile.png" alt="しずく" fill style={{ objectFit: 'cover' }} />
+              <Image src="/images/characters/minori-smile.png" alt="みのり" fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{
               background: '#f0faf0',
@@ -203,7 +203,7 @@ export default function DiagnosisShell({
               padding: '10px 14px', flex: 1,
             }}>
               <p style={{ fontSize: 13, color: '#1a4a1a', margin: 0, lineHeight: 1.6 }}>
-                診断が完了しました！あなたの結果をお伝えします。
+                診断が完了しました！あなたの状況に合わせた結果をお伝えします。
               </p>
             </div>
           </div>
@@ -272,48 +272,101 @@ export default function DiagnosisShell({
             </Link>
           )}
 
-          {/* しずくおすすめサービス */}
+          {/* みのりおすすめサービス（アフィリエイト強化版） */}
           {recommendServices.length > 0 && (
-            <div style={{ background: '#fff', border: '1px solid #b8ddb8', borderRadius: 12, padding: '16px', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
-                  <Image src="/images/characters/minori-smile.png" alt="しずく" fill style={{ objectFit: 'cover' }} />
+            <div style={{
+              background: 'linear-gradient(180deg, #f4faf4 0%, #ffffff 100%)',
+              border: '2px solid #90c890',
+              borderRadius: 16,
+              padding: '18px 16px',
+              marginBottom: 16,
+              boxShadow: '0 4px 14px rgba(45,106,45,0.06)'
+            }}>
+              {/* セクションヘッダー：親近感と処方箋感の演出 */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 14 }}>
+                <div style={{ width: 34, height: 34, borderRadius: '50%', overflow: 'hidden', position: 'relative', flexShrink: 0, border: '1.5px solid #b8ddb8' }}>
+                  <Image src="/images/characters/minori-care.png" alt="みのり" fill style={{ objectFit: 'cover' }} />
                 </div>
-                <p style={{ fontSize: 13, fontWeight: 600, color: '#1a2d1a', margin: 0 }}>
-                  あなたにおすすめのサービス
-                </p>
+                <div>
+                  <p style={{ fontSize: 14, fontWeight: 800, color: '#1a2d1a', margin: '0 0 2px' }}>
+                    🌿 大切な実家を損せず守るための専門窓口
+                  </p>
+                  <p style={{ fontSize: 11, color: '#3d6a3d', margin: 0, lineHeight: 1.4 }}>
+                    後回しにするほどリスクが増える実家の問題。まずは現状を把握できる無料の優良窓口をおすすめします。
+                  </p>
+                </div>
               </div>
+
+              {/* サービスカードのループ */}
               {recommendServices.map((s, i) => (
-                <div key={i} style={{ border: '1px solid #b8ddb8', borderRadius: 10, marginBottom: 8, overflow: 'hidden', background: '#fff' }}>
+                <div key={i} style={{
+                  border: '1px solid #b8ddb8',
+                  borderRadius: 12,
+                  marginBottom: 12,
+                  overflow: 'hidden',
+                  background: '#fff',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
+                }}>
                   <a href={s.url} target="_blank" rel="nofollow noopener noreferrer"
-                    style={{ display: 'block', padding: '12px', textDecoration: 'none' }}>
-                    {/* バナー画像（あれば表示・インプレッション計測付き） */}
+                    style={{ display: 'block', padding: '14px', textDecoration: 'none' }}>
+                    
                     {s.imageUrl && (
-                      <div style={{ textAlign: 'center', marginBottom: 8 }}>
+                      <div style={{ textAlign: 'center', marginBottom: 10 }}>
                         <img
                           src={s.imageUrl}
                           alt={s.name}
                           width={Math.min(s.imageWidth ?? 300, 260)}
                           height={Math.round((s.imageHeight ?? 250) * Math.min(s.imageWidth ?? 300, 260) / (s.imageWidth ?? 300))}
-                          style={{ border: 'none', maxWidth: '100%', maxHeight: 180, objectFit: 'contain', borderRadius: 6 }}
+                          style={{ border: 'none', maxWidth: '100%', maxHeight: 180, objectFit: 'contain', borderRadius: 8 }}
                         />
                       </div>
                     )}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: '#1f2937' }}>{s.name}</span>
-                      <span style={{ fontSize: 10, background: '#f0faf0', color: '#2d6a2d', borderRadius: 4, padding: '2px 6px', border: '1px solid #c8e6c8', whiteSpace: 'nowrap' }}>
-                        {s.badge}
-                      </span>
+
+                    {/* タイトル ＆ バッジ */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6, gap: 8 }}>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: '#1f2937' }}>{s.name}</span>
+                      {s.badge && (
+                        <span style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          background: '#f0faf0',
+                          color: '#2d6a2d',
+                          border: '0.5px solid #b8ddb8',
+                          borderRadius: 4,
+                          padding: '2px 8px',
+                          whiteSpace: 'nowrap'
+                        }}>
+                          ✨ {s.badge}
+                        </span>
+                      )}
                     </div>
-                    <p style={{ fontSize: 12, color: '#6b7280', margin: '0 0 8px', lineHeight: 1.5 }}>{s.description}</p>
-                    <div style={{
-                      background: 'linear-gradient(135deg, #2d6a2d, #1a5a1a)', color: '#fff',
-                      borderRadius: 6, padding: '8px', textAlign: 'center', fontSize: 12, fontWeight: 700,
-                    }}>
-                      詳しく見てみる →
+
+                    {/* 説明文 */}
+                    <p style={{ fontSize: 12, color: '#4b5563', margin: '0 0 12px', lineHeight: 1.6 }}>
+                      {s.description}
+                    </p>
+
+                    {/* マイクロコピーと強力なCTAボタン */}
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: 10, color: '#2d6a2d', fontWeight: 700, margin: '0 0 4px', letterSpacing: '0.02em' }}>
+                        ＼ 完全無料・机上査定やオンライン相談のみの利用も可能 ／
+                      </p>
+                      <div style={{
+                        background: 'linear-gradient(135deg, #2d6a2d 0%, #1a5a1a 100%)',
+                        color: '#fff',
+                        borderRadius: 8,
+                        padding: '10px 16px',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        fontWeight: 700,
+                        boxShadow: '0 4px 12px rgba(45, 106, 45, 0.2)',
+                        transition: 'transform 0.2s'
+                      }}>
+                        公式ページで無料査定・シミュレーションを試す ➔
+                      </div>
                     </div>
+
                   </a>
-                  {/* インプレッション計測（もしもアフィリエイト必須） */}
                   {s.impUrl && (
                     <img src={s.impUrl} width={1} height={1} style={{ border: 'none', display: 'block' }} loading="lazy" alt="" />
                   )}
