@@ -97,15 +97,21 @@ export async function generateStaticParams() {
   return Object.keys(SERVICES).map(slug => ({ slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const s = SERVICES[params.slug]
-  if (!s) return { title: 'サービス紹介 | 実家どうするナビ' }
-  return { title: `${s.name} | 実家どうするナビ`, description: s.tagline }
-}
+-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+-  const s = SERVICES[params.slug]
++export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
++  const { slug } = await params
++  const s = SERVICES[slug]
+   if (!s) return { title: 'サービス紹介 | 実家どうするナビ' }
+   return { title: `${s.name} | 実家どうするナビ`, description: s.tagline }
+ }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const s = SERVICES[params.slug]
-  if (!s) notFound()
+-export default function ServicePage({ params }: { params: { slug: string } }) {
+-  const s = SERVICES[params.slug]
++export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
++  const { slug } = await params
++  const s = SERVICES[slug]
+   if (!s) notFound()
 
   return (
     <main style={{ maxWidth: 480, margin: '0 auto', padding: '16px 16px 48px' }}>
