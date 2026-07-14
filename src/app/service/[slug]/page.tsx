@@ -6,6 +6,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import A8OfficialBanner from '@/components/A8OfficialBanner'
 
 const SERVICES: Record<string, {
   name: string; tagline: string; overview: string
@@ -14,6 +15,7 @@ const SERVICES: Record<string, {
   faq: { q: string; a: string }[]
   ctaText: string; affiliateUrl: string
   imgUrl?: string; imgWidth?: number; imgHeight?: number; impUrl?: string
+  bannerId?: string
   asp: string; category: string
   relatedColumns: { cat: string; id: number; title: string }[]
 }> = {
@@ -36,6 +38,7 @@ const SERVICES: Record<string, {
     imgUrl: 'https://www28.a8.net/svt/bgt?aid=260521603694&wid=002&eno=01&mid=s00000025809001004000&mc=1',
     imgWidth: 100, imgHeight: 60,
     impUrl: 'https://www10.a8.net/0.gif?a8mat=4B3VR7+BH6VDM+5J56+5Z6WX',
+    bannerId: 'jikka-wakegai',
     asp: 'A8', category: '不動産買取',
     relatedColumns: [
       { cat: 'baikyaku-col', id: 5, title: '築古・訳あり物件の売却方法' },
@@ -61,6 +64,7 @@ const SERVICES: Record<string, {
     imgUrl: 'https://www20.a8.net/svt/bgt?aid=260521603740&wid=002&eno=01&mid=s00000024144002007000&mc=1',
     imgWidth: 300, imgHeight: 250,
     impUrl: 'https://www10.a8.net/0.gif?a8mat=4B3VR7+C8KT7E+56AO+BY641',
+    bannerId: 'jikka-rakuuru-sozoku',
     asp: 'A8', category: '不動産買取',
     relatedColumns: [
       { cat: 'sozoku-col', id: 1, title: '実家の相続でもめないための5つの準備' },
@@ -85,6 +89,7 @@ const SERVICES: Record<string, {
     imgUrl: 'https://www22.a8.net/svt/bgt?aid=260521603741&wid=002&eno=01&mid=s00000024144003005000&mc=1',
     imgWidth: 468, imgHeight: 120,
     impUrl: 'https://www15.a8.net/0.gif?a8mat=4B3VR7+C968T6+56AO+HW2Q9',
+    bannerId: 'jikka-rakuuru-akiya',
     asp: 'A8', category: '不動産買取',
     relatedColumns: [
       { cat: 'akiya-col', id: 1, title: '空き家を放置するとどうなる？リスクと対策' },
@@ -118,7 +123,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </div>
       <p style={{ fontSize: 11, color: '#9ca3af', marginBottom: 12 }}>※本ページにはアフィリエイト広告が含まれます（{s.asp}）</p>
 
-      {s.imgUrl && (
+      {s.bannerId ? (
+        <div style={{ marginBottom: 16 }}>
+          <A8OfficialBanner id={s.bannerId} />
+        </div>
+      ) : s.imgUrl && (
         <div style={{ textAlign: 'center', marginBottom: 16 }}>
           <a href={s.affiliateUrl} target="_blank" rel="nofollow noopener noreferrer">
             <img src={s.imgUrl} alt={s.name} width={Math.min(s.imgWidth ?? 300, 300)} style={{ maxWidth: '100%', maxHeight: 200, objectFit: 'contain', borderRadius: 8 }} />
@@ -179,14 +188,16 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         ))}
       </div>
 
-      <div style={{ background: 'linear-gradient(135deg, #f0faf0, #e8f5e8)', border: '1.5px solid #90c890', borderRadius: 14, padding: '16px', textAlign: 'center', marginBottom: 16 }}>
-        <p style={{ fontSize: 12, color: '#3d6a3d', marginBottom: 10, lineHeight: 1.6 }}>公式サイトでサービスの詳細をご確認ください</p>
-        <a href={s.affiliateUrl} target="_blank" rel="nofollow noopener noreferrer"
-          style={{ display: 'block', background: 'linear-gradient(135deg, #2d6a2d, #1a5a1a)', color: '#fff', borderRadius: 10, padding: '14px', fontSize: 14, fontWeight: 800, textDecoration: 'none', marginBottom: 8 }}>
-          {s.ctaText}
-        </a>
-        <p style={{ fontSize: 10, color: '#9ca3af', margin: 0 }}>※外部サービスへ移動します</p>
-      </div>
+      {!s.bannerId && (
+        <div style={{ background: 'linear-gradient(135deg, #f0faf0, #e8f5e8)', border: '1.5px solid #90c890', borderRadius: 14, padding: '16px', textAlign: 'center', marginBottom: 16 }}>
+          <p style={{ fontSize: 12, color: '#3d6a3d', marginBottom: 10, lineHeight: 1.6 }}>公式サイトでサービスの詳細をご確認ください</p>
+          <a href={s.affiliateUrl} target="_blank" rel="nofollow noopener noreferrer"
+            style={{ display: 'block', background: 'linear-gradient(135deg, #2d6a2d, #1a5a1a)', color: '#fff', borderRadius: 10, padding: '14px', fontSize: 14, fontWeight: 800, textDecoration: 'none', marginBottom: 8 }}>
+            {s.ctaText}
+          </a>
+          <p style={{ fontSize: 10, color: '#9ca3af', margin: 0 }}>※外部サービスへ移動します</p>
+        </div>
+      )}
 
       {s.relatedColumns.length > 0 && (
         <div style={{ marginBottom: 16 }}>

@@ -22,6 +22,7 @@ export default function Page() {
       ]}
       recommendServices={[
         {
+          bannerId: 'jikka-reest',
           name: 'Re:est（リフォーム見積もり）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+BLCWM2+5UT6+5ZMCH',
           description: '',
@@ -44,6 +45,7 @@ export default function Page() {
           impUrl: 'https://www12.a8.net/0.gif?a8mat=4B3VR7+CEJ596+2ISC+I0KRL',
         },
         {
+          bannerId: 'jikka-reform-hikaku',
           name: 'リフォーム比較プロ',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+CC5EU2+46CI+609HT',
           description: '',

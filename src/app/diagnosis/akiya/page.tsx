@@ -22,6 +22,7 @@ export default function Page() {
       ]}
       recommendServices={[
         {
+          bannerId: 'jikka-wakegai',
           name: 'ワケガイ（訳あり物件買取）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+BH6VDM+5J56+5Z6WX',
           description: '',
@@ -33,6 +34,7 @@ export default function Page() {
           impUrl: 'https://www10.a8.net/0.gif?a8mat=4B3VR7+BH6VDM+5J56+5Z6WX',
         },
         {
+          bannerId: 'jikka-rakuuru-akiya',
           name: 'ラクウル（空き家・中古買取）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+C968T6+56AO+HW2Q9',
           description: '',
@@ -44,6 +46,7 @@ export default function Page() {
           impUrl: 'https://www15.a8.net/0.gif?a8mat=4B3VR7+C968T6+56AO+HW2Q9',
         },
         {
+          bannerId: 'jikka-wakeari-center',
           name: '訳あり物件買取センター（借地権）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+BG0062+5TF6+5ZEMP',
           description: '',
@@ -55,6 +58,7 @@ export default function Page() {
           impUrl: 'https://www16.a8.net/0.gif?a8mat=4B3VR7+BG0062+5TF6+5ZEMP',
         },
         {
+          bannerId: 'jikka-shakuchiken',
           name: '借地権 無料相談ドットコム',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+ATYYSA+5TEW+5YZ75',
           description: '',
@@ -66,6 +70,7 @@ export default function Page() {
           impUrl: 'https://www11.a8.net/0.gif?a8mat=4B3VR7+ATYYSA+5TEW+5YZ75',
         },
         {
+          bannerId: 'jikka-reest',
           name: 'Re:est（リフォーム見積もり）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+BLCWM2+5UT6+5ZMCH',
           description: '',

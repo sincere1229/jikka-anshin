@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Papa from 'papaparse'
 import type { Question, ResultTemplate, RecommendService, RoadmapInfo } from '@/types/diagnosis'
+import A8OfficialBanner from '@/components/A8OfficialBanner'
 
 interface Props {
   diagnosisId: string
@@ -307,67 +308,89 @@ export default function DiagnosisShell({
                   background: '#fff',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
                 }}>
-                  <a href={s.url} target="_blank" rel="nofollow noopener noreferrer"
-                    style={{ display: 'block', padding: '14px', textDecoration: 'none' }}>
-                    
-                    {s.imageUrl && (
-                      <div style={{ textAlign: 'center', marginBottom: 10 }}>
-                        <img
-                          src={s.imageUrl}
-                          alt={s.name}
-                          width={Math.min(s.imageWidth ?? 300, 260)}
-                          height={Math.round((s.imageHeight ?? 250) * Math.min(s.imageWidth ?? 300, 260) / (s.imageWidth ?? 300))}
-                          style={{ border: 'none', maxWidth: '100%', maxHeight: 180, objectFit: 'contain', borderRadius: 8 }}
-                        />
+                  {s.bannerId ? (
+                    // A8公式バナー方式：officialHtml自体が唯一の外部リンク。
+                    // 旧クリックURL(s.url)へのリンクや旧CTAボタンは表示しない。
+                    <div style={{ padding: '14px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6, gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 700, color: '#1f2937' }}>{s.name}</span>
+                        {s.badge && (
+                          <span style={{
+                            fontSize: 10, fontWeight: 700, background: '#f0faf0', color: '#2d6a2d',
+                            border: '0.5px solid #b8ddb8', borderRadius: 4, padding: '2px 8px', whiteSpace: 'nowrap'
+                          }}>
+                            ✨ {s.badge}
+                          </span>
+                        )}
                       </div>
-                    )}
-
-                    {/* タイトル ＆ バッジ */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6, gap: 8 }}>
-                      <span style={{ fontSize: 14, fontWeight: 700, color: '#1f2937' }}>{s.name}</span>
-                      {s.badge && (
-                        <span style={{
-                          fontSize: 10,
-                          fontWeight: 700,
-                          background: '#f0faf0',
-                          color: '#2d6a2d',
-                          border: '0.5px solid #b8ddb8',
-                          borderRadius: 4,
-                          padding: '2px 8px',
-                          whiteSpace: 'nowrap'
-                        }}>
-                          ✨ {s.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* 説明文 */}
-                    <p style={{ fontSize: 12, color: '#4b5563', margin: '0 0 12px', lineHeight: 1.6 }}>
-                      {s.description}
-                    </p>
-
-                    {/* マイクロコピーと強力なCTAボタン */}
-                    <div style={{ textAlign: 'center' }}>
-                      <p style={{ fontSize: 10, color: '#2d6a2d', fontWeight: 700, margin: '0 0 4px', letterSpacing: '0.02em' }}>
-                        ＼ 完全無料・机上査定やオンライン相談のみの利用も可能 ／
+                      <p style={{ fontSize: 12, color: '#4b5563', margin: '0 0 12px', lineHeight: 1.6 }}>
+                        {s.description}
                       </p>
-                      <div style={{
-                        background: 'linear-gradient(135deg, #2d6a2d 0%, #1a5a1a 100%)',
-                        color: '#fff',
-                        borderRadius: 8,
-                        padding: '10px 16px',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        fontWeight: 700,
-                        boxShadow: '0 4px 12px rgba(45, 106, 45, 0.2)',
-                        transition: 'transform 0.2s'
-                      }}>
-                        公式ページで無料査定・シミュレーションを試す ➔
-                      </div>
+                      <A8OfficialBanner id={s.bannerId} />
                     </div>
+                  ) : (
+                    <a href={s.url} target="_blank" rel="nofollow noopener noreferrer"
+                      style={{ display: 'block', padding: '14px', textDecoration: 'none' }}>
 
-                  </a>
-                  {s.impUrl && (
+                      {s.imageUrl && (
+                        <div style={{ textAlign: 'center', marginBottom: 10 }}>
+                          <img
+                            src={s.imageUrl}
+                            alt={s.name}
+                            width={Math.min(s.imageWidth ?? 300, 260)}
+                            height={Math.round((s.imageHeight ?? 250) * Math.min(s.imageWidth ?? 300, 260) / (s.imageWidth ?? 300))}
+                            style={{ border: 'none', maxWidth: '100%', maxHeight: 180, objectFit: 'contain', borderRadius: 8 }}
+                          />
+                        </div>
+                      )}
+
+                      {/* タイトル ＆ バッジ */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6, gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 700, color: '#1f2937' }}>{s.name}</span>
+                        {s.badge && (
+                          <span style={{
+                            fontSize: 10,
+                            fontWeight: 700,
+                            background: '#f0faf0',
+                            color: '#2d6a2d',
+                            border: '0.5px solid #b8ddb8',
+                            borderRadius: 4,
+                            padding: '2px 8px',
+                            whiteSpace: 'nowrap'
+                          }}>
+                            ✨ {s.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* 説明文 */}
+                      <p style={{ fontSize: 12, color: '#4b5563', margin: '0 0 12px', lineHeight: 1.6 }}>
+                        {s.description}
+                      </p>
+
+                      {/* マイクロコピーと強力なCTAボタン */}
+                      <div style={{ textAlign: 'center' }}>
+                        <p style={{ fontSize: 10, color: '#2d6a2d', fontWeight: 700, margin: '0 0 4px', letterSpacing: '0.02em' }}>
+                          ＼ 完全無料・机上査定やオンライン相談のみの利用も可能 ／
+                        </p>
+                        <div style={{
+                          background: 'linear-gradient(135deg, #2d6a2d 0%, #1a5a1a 100%)',
+                          color: '#fff',
+                          borderRadius: 8,
+                          padding: '10px 16px',
+                          textAlign: 'center',
+                          fontSize: 13,
+                          fontWeight: 700,
+                          boxShadow: '0 4px 12px rgba(45, 106, 45, 0.2)',
+                          transition: 'transform 0.2s'
+                        }}>
+                          公式ページで無料査定・シミュレーションを試す ➔
+                        </div>
+                      </div>
+
+                    </a>
+                  )}
+                  {!s.bannerId && s.impUrl && (
                     <img src={s.impUrl} width={1} height={1} style={{ border: 'none', display: 'block' }} loading="lazy" alt="" />
                   )}
                 </div>
