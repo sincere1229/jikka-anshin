@@ -49,4 +49,5 @@ export interface RecommendService {
   imageWidth?: number
   imageHeight?: number
   impUrl?: string       // インプレッション計測URL（もしも必須）
+  bannerId?: string     // A8公式バナー方式へ移行済みの場合、src/data/a8OfficialBanners.ts のキー
 }

@@ -22,6 +22,7 @@ export default function Page() {
       ]}
       recommendServices={[
         {
+          bannerId: 'jikka-wakegai',
           name: 'ワケガイ（訳あり物件買取）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+BH6VDM+5J56+5Z6WX',
           description: '',
@@ -33,6 +34,7 @@ export default function Page() {
           impUrl: 'https://www10.a8.net/0.gif?a8mat=4B3VR7+BH6VDM+5J56+5Z6WX',
         },
         {
+          bannerId: 'jikka-rakuuru-sozoku',
           name: 'ラクウル（相続不動産売却）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+C8KT7E+56AO+BY641',
           description: '',
@@ -44,6 +46,7 @@ export default function Page() {
           impUrl: 'https://www10.a8.net/0.gif?a8mat=4B3VR7+C8KT7E+56AO+BY641',
         },
         {
+          bannerId: 'jikka-rakuuru-akiya',
           name: 'ラクウル（空き家・中古買取）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+C968T6+56AO+HW2Q9',
           description: '',
@@ -55,6 +58,7 @@ export default function Page() {
           impUrl: 'https://www15.a8.net/0.gif?a8mat=4B3VR7+C968T6+56AO+HW2Q9',
         },
         {
+          bannerId: 'jikka-mochiie-baikyaku',
           name: '持ち家売却',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+AWCP7E+53AC+1BNQZ5',
           description: '',
@@ -66,6 +70,7 @@ export default function Page() {
           impUrl: 'https://www16.a8.net/0.gif?a8mat=4B3VR7+AWCP7E+53AC+1BNQZ5',
         },
         {
+          bannerId: 'jikka-miraias',
           name: 'ミライアス（不動産スマート仲介）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+BMJRTM+4I6M+65ME9',
           description: '',

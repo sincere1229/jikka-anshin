@@ -22,6 +22,7 @@ export default function Page() {
       ]}
       recommendServices={[
         {
+          bannerId: 'jikka-rakuuru-sozoku',
           name: 'ラクウル（相続不動産売却）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+C8KT7E+56AO+BY641',
           description: '',
@@ -33,6 +34,7 @@ export default function Page() {
           impUrl: 'https://www10.a8.net/0.gif?a8mat=4B3VR7+C8KT7E+56AO+BY641',
         },
         {
+          bannerId: 'jikka-jfc',
           name: 'JFC（不動産担保ローン）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+CI3QVU+3GA6+60OXD',
           description: '',
@@ -44,6 +46,7 @@ export default function Page() {
           impUrl: 'https://www15.a8.net/0.gif?a8mat=4B3VR7+CI3QVU+3GA6+60OXD',
         },
         {
+          bannerId: 'jikka-marunouchi-ams',
           name: '丸の内AMS（不動産担保ローン）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B3VR7+CGBG2I+5PBE+5Z6WX',
           description: '',
@@ -55,6 +58,7 @@ export default function Page() {
           impUrl: 'https://www17.a8.net/0.gif?a8mat=4B3VR7+CGBG2I+5PBE+5Z6WX',
         },
         {
+          bannerId: 'jikka-liferesa',
           name: 'ライフリセット（遺品整理）',
           url: 'https://px.a8.net/svt/ejp?a8mat=4B5LK3+1GZLMA+36X8+1ZHAW1',
           description: '',
